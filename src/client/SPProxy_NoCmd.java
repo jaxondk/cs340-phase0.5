@@ -1,6 +1,7 @@
 package client;
 
 import shared.IStringProcessor;
+import shared.Request;
 import shared.Results;
 
 /**
@@ -26,8 +27,12 @@ public class SPProxy_NoCmd implements IStringProcessor {
 
     public String toLC(String s)
     {
-        Results r = clientComm.send("/toLC", s);
-        return null;
+        Request request = new Request(s, null);
+        Results results = clientComm.sendAndRecv("/toLC", request);
+        if(results.isSuccess())
+            return results.getData();
+        else
+            return results.getErrorInfo();
     }
 
     public String trim(String s)
