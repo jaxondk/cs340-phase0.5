@@ -1,18 +1,20 @@
 package server.handlers;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-
-import java.io.IOException;
+import server.StringProcessor;
+import shared.Request;
+import shared.Results;
 
 /**
  * Created by jaxon on 1/17/18.
  */
-public class trimHandler extends Handler implements HttpHandler
+public class trimHandler extends Handler
 {
-    @Override
-    public void handle(HttpExchange httpExchange) throws IOException
+    private static StringProcessor _sp = StringProcessor.Instance();
+    public Results process(Request request)
     {
-
+        Results results = new Results();
+        results.setData(_sp.trim(request.getText()));
+        results.setSuccess(true);
+        return results;
     }
 }

@@ -6,5 +6,5 @@ package shared;
 public interface IStringProcessor {
     String toLC(String s);
     String trim(String s);
-    String parseInt(String s);
+    String parseInt(String s) throws NumberFormatException;
 }

@@ -11,9 +11,9 @@ public class Results
     private String data;
     private String errorInfo;
 
-    public boolean isSuccess()
+    public String getAppropriateMessage()
     {
-        return success;
+        return success ? data : errorInfo;
     }
 
     public void setSuccess(boolean success)

@@ -38,14 +38,12 @@ public class ClientComm
             http.connect();
 
             OutputStream reqBodyOS = http.getOutputStream(); // Get the output stream containing the HTTP request body
-            StreamUtil.writeString(gson.toJson(request), reqBodyOS); //TODO - idk if this will work with a generic Object request
+            StreamUtil.writeString(gson.toJson(request), reqBodyOS);
 
             reqBodyOS.close(); //send bytes
 
             // By the time we get here, the HTTP response has been received from the server.
             if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                System.out.println("HTTP response code successful");
-                // Get the input stream containing the HTTP response body
                 InputStream respBodyIS = http.getInputStream();
                 String respJson = StreamUtil.readString(respBodyIS);
                 results = gson.fromJson(respJson, Results.class);
@@ -55,10 +53,6 @@ public class ClientComm
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (Exception e) {
-            System.out.println("Exception thrown");
             e.printStackTrace();
         }
         return results;

@@ -8,23 +8,23 @@ import shared.IStringProcessor;
 public class StringProcessor implements IStringProcessor {
     private static StringProcessor _sp = new StringProcessor();
     private StringProcessor(){}
-    public StringProcessor Instance()
+    public static StringProcessor Instance()
     {
         return _sp;
     }
 
     public String toLC(String s)
     {
-        return null;
+        return s.toLowerCase();
     }
 
     public String trim(String s)
     {
-        return null;
+        return s.trim();
     }
 
-    public String parseInt(String s)
+    public String parseInt(String s) throws NumberFormatException
     {
-        return null;
+        return ""+Integer.parseInt(s);
     }
 }

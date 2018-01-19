@@ -29,19 +29,20 @@ public class SPProxy_NoCmd implements IStringProcessor {
     {
         Request request = new Request(s, null);
         Results results = clientComm.sendAndRecv("/toLC", request);
-        if(results.isSuccess())
-            return results.getData();
-        else
-            return results.getErrorInfo();
+        return results.getAppropriateMessage();
     }
 
     public String trim(String s)
     {
-        return null;
+        Request request = new Request(s, null);
+        Results results = clientComm.sendAndRecv("/trim", request);
+        return results.getAppropriateMessage();
     }
 
     public String parseInt(String s)
     {
-        return null;
+        Request request = new Request(s, null);
+        Results results = clientComm.sendAndRecv("/parseInt", request);
+        return results.getAppropriateMessage();
     }
 }
