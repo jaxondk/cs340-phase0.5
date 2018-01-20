@@ -1,6 +1,6 @@
 package server.handlers;
 
-import server.StringProcessor;
+import shared.ICommand;
 import shared.Request;
 import shared.Results;
 
@@ -9,12 +9,9 @@ import shared.Results;
  */
 public class CommandHandler extends Handler
 {
-    private static StringProcessor _sp = StringProcessor.Instance();
     public Results process(Request request)
     {
-        Results results = new Results();
-        results.setData(_sp.toLC(request.getText()));
-        results.setSuccess(true);
-        return results;
+        ICommand c = request.getCommand();
+        return c.execute();
     }
 }

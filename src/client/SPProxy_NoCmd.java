@@ -17,8 +17,7 @@ public class SPProxy_NoCmd implements IStringProcessor {
         clientComm = new ClientComm(serverHost, serverPort);
     }
 
-    //TODO - i don't want to hard code host and port into clientComm, but i don't like requiring Instance() to take params either. Find better way
-    public static SPProxy_NoCmd Instance(String serverHost, String serverPort)
+    static SPProxy_NoCmd Instance(String serverHost, String serverPort)
     {
         if(_proxy == null)
             _proxy = new SPProxy_NoCmd(serverHost, serverPort);

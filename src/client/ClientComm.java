@@ -1,7 +1,6 @@
 package client;
 
 import com.google.gson.Gson;
-import shared.Request;
 import shared.Results;
 import shared.StreamUtil;
 
@@ -11,19 +10,18 @@ import java.net.*;
 /**
  * Created by jaxon on 1/17/18.
  */
-public class ClientComm
+class ClientComm
 {
     private String _host, _port;
     private static Gson gson = new Gson();
 
-    public ClientComm(String serverHost, String serverPort)
+    ClientComm(String serverHost, String serverPort)
     {
         _host = serverHost;
         _port = serverPort;
     }
 
-    //TODO - Need to make this work with Command objects. How do you send objects? EDIT: should work as is now
-    public Results sendAndRecv(String urlPath, Request request)
+    Results sendAndRecv(String urlPath, Object data)
     {
         Results results = null;
         try {
@@ -38,7 +36,7 @@ public class ClientComm
             http.connect();
 
             OutputStream reqBodyOS = http.getOutputStream(); // Get the output stream containing the HTTP request body
-            StreamUtil.writeString(gson.toJson(request), reqBodyOS);
+            StreamUtil.writeString(gson.toJson(data), reqBodyOS);
 
             reqBodyOS.close(); //send bytes
 

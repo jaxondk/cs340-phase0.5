@@ -27,7 +27,8 @@ abstract class Handler implements HttpHandler
     {
         boolean success = false;
 
-        try {
+        try
+        {
             if (exchange.getRequestMethod().toLowerCase().equals("post"))
             {
                 Request request = deserializeReqBody(exchange);
@@ -51,7 +52,7 @@ abstract class Handler implements HttpHandler
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);
             // We are not sending a response body, so close the response body
             // output stream, indicating that the response is complete.
-            exchange.getResponseBody().close(); //todo - might want to send back a results object here with the error info?
+            exchange.getResponseBody().close();
 
             // Display/log the stack trace
             e.printStackTrace();
@@ -64,9 +65,18 @@ abstract class Handler implements HttpHandler
     // Deserialize the JSON string from the HTTP request body into an object
     private Request deserializeReqBody(HttpExchange exchange) throws IOException
     {
-        InputStream reqBody = exchange.getRequestBody();
-        String json = StreamUtil.readString(reqBody);
-        return _gson.fromJson(json, Request.class);
+        Request request = null;
+        try
+        {
+            InputStream reqBody = exchange.getRequestBody();
+            String json = StreamUtil.readString(reqBody);
+            request = _gson.fromJson(json, Request.class);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return request;
     }
 
     private void sendResp(HttpExchange exchange, Results results) throws IOException

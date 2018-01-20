@@ -1,7 +1,5 @@
 package shared;
 
-import shared.Command;
-
 /**
  * Created by jaxon on 1/17/18.
  *
@@ -10,16 +8,16 @@ import shared.Command;
  */
 public class Request
 {
-    Command command;
-    String text;
+    private SPCommand command;
+    private String text;
 
-    public Request(String text, Command command)
+    public Request(String text, SPCommand command)
     {
         this.text = text;
         this.command = command;
     }
 
-    public Command getCommand()
+    public SPCommand getCommand()
     {
         return command;
     }
